@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+/* Variables */
+:root {
+    --main-color: #70C5FF;
+    --secondary-color: #2b2b2b;
+    --main-font: Pacifico;
+    --secondary-font: Helvetica;
+}
+
+body, html {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 60px;
+}
+
+input {
+    margin: 0 10px;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    background: #f3f3f3;
+}
+
+button {
+    margin: 0 10px;
+    min-width: 150px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: #2b2b2b;
+    color: white;
+}
+
+section {
+    min-height: 100vh;
+}
+
+footer {
+    height: 6vh;
+    background-color: #2b2b2b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
