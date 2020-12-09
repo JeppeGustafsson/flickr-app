@@ -8,6 +8,14 @@
     --secondary-font: Helvetica;
 }
 
+.font-style-primary {
+    font-family: var(--main-font);
+}
+
+.font-style-secondary {
+    font-family: var(--secondary-font);
+}
+
 body, html {
     overflow-x: hidden;
     width: 100%;
@@ -34,6 +42,7 @@ input {
     margin: 0 10px;
     padding: 10px 20px;
     width: 100%;
+    min-width: 80px;
     border-radius: 20px;
     outline: none;
     border: none;
@@ -42,7 +51,8 @@ input {
 
 #search-btn {
     margin: 0 10px;
-    min-width: 150px;
+    width: 100%;
+    max-width: 150px;
     padding: 10px 20px;
     border-radius: 20px;
     border: none;
@@ -81,21 +91,93 @@ section {
     background-size: cover;
     margin: 0.3rem 0;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .photo-wrapper h2 {
     width: 100%;
-    max-width: 200px;
     font-family: var(--secondary-font);
-    color: white;
+    color: var(--secondary-color);
+}
+
+.photo-wrapper p {
+    font-family: var(--secondary-font);
+    color: var(--secondary-color);
+}
+
+.big-photo-wrapper.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .big-photo-wrapper {
     opacity: 0;
     pointer-events: none;
-    position: absolute;
     top: 0;
     left: 0;
+    transition: 0.5s ease;
+    overflow: hidden;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.8);
+    position: fixed;
+    width: 100%;
+    max-width: none;
+    height: 100vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    border-radius: 0;
+    margin: 0;
+}
+
+.lightbox {
+    background-color: rgba(255,255,255,0.9);
+    padding: 1rem;
+    border-radius: 20px;
+    position: relative;
+}
+
+.lightbox .closeBtn {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    padding: 1.2rem 1.4rem;
+    background-color: var(--secondary-color);
+    border-radius: 50% 50%;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+}
+
+.big-photo-wrapper img {
+    border-radius: 20px;
+}
+
+.add-comment-wrapper {
+    display: flex;
+}
+
+.add-comment-wrapper button {
+    margin: 0 10px;
+    width: 100%;
+    max-width: 150px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: var(--main-color);
+    color: white;
+    cursor: pointer;
+}
+
+.big-photo-wrapper .comment-section {
+    height: 300px;
+    overflow: auto;
+    width: 97%;
+    background-color: #f3f3f3;
+    margin: 1rem auto;
 }
 
 .loader-wrapper {
@@ -188,6 +270,28 @@ section {
     top: 65px;
     z-index: -1;
     background-color: white;
-    border: 5px solid var(--main-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s ease;
+}
+
+.active .options-wrapper {
+    left: 0;
+}
+
+.options-wrapper button {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 60px;
+}
+
+.options-wrapper button::before {
+    content: "";
+    padding: 0 8px;
+    margin-right: 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 50% 50%;
 }
 

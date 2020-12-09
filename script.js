@@ -1,4 +1,5 @@
 const searchBtn = document.getElementById('search-btn');
+const settings = document.getElementById('settings');
 const output = document.getElementById('img-output');
 const loader = document.getElementById('loader');
 
@@ -29,20 +30,36 @@ searchBtn.addEventListener('click', search);
 const renderImages = () => {
     setTimeout(() => {
         loader.classList.remove('loading');
-    }, 2000)
+    },2000)
     console.log(results);
     results.photos.photo.forEach(photoObj => {
         const content = `<div id="${photoObj.id}" class="photo-wrapper" style="background-image:url(https://live.staticflickr.com/${photoObj.server}/${photoObj.id}_${photoObj.secret}_c.jpg); height:${Math.floor(Math.random() * 450) + 250}px">
     
                             <div class="big-photo-wrapper">
                             <div class="lightbox">
+                            <button class="closeBtn">X</button>
                             <img src="https://live.staticflickr.com/${photoObj.server}/${photoObj.id}_${photoObj.secret}_c.jpg" alt="${photoObj.title}"/>
-                            <h2>${photoObj.title}</h2>
-                            <p></p>
+                            <h2 class="font-style-secondary">${photoObj.title}</h2>
+                            <h3 class="font-style-secondary">User comments:</h3>
+                            <div class="add-comment-wrapper font-style-secondary">
+                                <input class="font-style-secondary" id="comment-input" type="text" />
+                                <button class="font-style-secondary">Post</button>
+                            </div>
+                            <div id="comment-output" class="comment-section font-style-secondary">
+                                
+                            </div>
                             </div>
                             </div>
                         </div>`;
         output.innerHTML += content;
+    });
+    document.querySelectorAll('.photo-wrapper').forEach(photo => {
+        photo.addEventListener('click', activeImage)
+    });
+    document.querySelectorAll('.closeBtn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.target.parentElement.parentElement.classList.remove('active');
+        });
     });
 }
 
@@ -55,6 +72,10 @@ const renderFilters = () => {
 
 }
 
-const activeImage = () => {
-
+const activeImage = (e) => {
+    e.target.firstElementChild.classList.add('active');
 }
+
+const openCloseSettings = () => {
+    settings.classList.toggle('active');
+}   

@@ -9,18 +9,18 @@
 <body>
     <header>
         <img class="logo" src="./images/logo.svg" alt="logo">
-        <div class="settings-wrapper">
-            <button id="settingsBtn" class="settings-btn">
+        <div id="settings" class="settings-wrapper">
+            <button onclick="openCloseSettings()" id="settingsBtn" class="settings-btn">
                 <img src="./images/settings.png" alt="settings">
             </button>
             <div class="options-wrapper">
-                <p>Results per page:</p>
-                <button class="num-btn">50</button>
-                <button class="num-btn">100</button>
-                <button class="num-btn">150</button>
+                <p class="font-style-secondary">Results per page:</p>
+                <button class="num-btn font-style-secondary">50</button>
+                <button class="num-btn font-style-secondary">100</button>
+                <button class="num-btn font-style-secondary">150</button>
             </div>
         </div>
-        <input id="search" type="text">
+        <input class="font-style-secondary" id="search" type="text">
         <button id="search-btn">Search</button>
     </header>
     <main>
@@ -28,7 +28,7 @@
 
         </section>
     </main>
-    <footer> WhatPic? </footer>
+    <footer class="font-style-primary"> WhatPic? </footer>
     <div id="loader" class="loader-wrapper">
         <div class="dot"></div>
         <div class="dot"></div>
