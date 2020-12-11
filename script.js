@@ -10,6 +10,7 @@ let query = "";
 const updateQuery = () => { query = document.getElementById('search').value };
 
 let results;
+let comments = [];
 let page = 1;
 let pageNums = 1;
 let safeSearch = 1; //1 is safe, 2 is moderate, 3 is restricted
@@ -56,7 +57,7 @@ searchBtn.addEventListener('click', search);
 const renderImages = () => {
     setTimeout(() => {
         loader.classList.remove('loading');
-    },2000)
+    },2000);
     console.log(results);
     results.photos.photo.forEach(photoObj => {
         const content = `<div id="${photoObj.id}" class="photo-wrapper" style="background-image:url(https://live.staticflickr.com/${photoObj.server}/${photoObj.id}_${photoObj.secret}_c.jpg); height:${Math.floor(Math.random() * 450) + 250}px">
@@ -72,7 +73,7 @@ const renderImages = () => {
                                 <button class="font-style-secondary">Post</button>
                             </div>
                             <div class="comment-section font-style-secondary">
-                                
+
                             </div>
                             </div>
                             </div>
@@ -94,7 +95,22 @@ const renderFilters = () => {
 }
 
 const activeImage = (e) => {
+    // comments = [];
     e.target.firstElementChild.classList.add('active');
+    const resultChildren = Array.from(output.children);
+    const index = resultChildren.indexOf(e.target);
+        fetch(`https://api.flickr.com/services/rest?method=flickr.photos.comments.getList&api_key=${KEY}&photo_id=${results.photos.photo[index].id}&format=json&nojsoncallback=1`)
+            .then(response => response.json())
+            .then(data => comments = data.comments.comment);
+    console.log(comments);
+
+    comments.forEach(comment => {
+        const commentEl = `<div class="comment-wrapper"> 
+                            <p class="comment-author"> ${comment.authorname} </p>
+                            <p class="comment-content"> ${comment._content} </p>
+                          </div>`;
+        e.target.querySelector('.comment-section').innerHTML += commentEl;
+    });
 }
 
 const openCloseSettings = () => {

@@ -139,6 +139,8 @@ section {
     padding: 1rem;
     border-radius: 20px;
     position: relative;
+    max-width: 800px;
+    max-height: 90%;
 }
 
 .lightbox .closeBtn {
@@ -156,6 +158,10 @@ section {
 
 .big-photo-wrapper img {
     border-radius: 20px;
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .add-comment-wrapper {
@@ -182,6 +188,27 @@ section {
     background-color: #f3f3f3;
     margin: 1rem auto;
 }
+
+.comment-section .comment-wrapper {
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.9);
+}
+
+.comment-section .comment-wrapper .comment-author {
+    font-weight: bold;
+}
+
+.comment-section .comment-wrapper .comment-content {
+    font-style: italic;
+}
+
+.comment-section .comment-wrapper p {
+    margin: 5px 0;
+}
+
+
 
 .loader-wrapper {
     position: absolute;
@@ -245,6 +272,7 @@ section {
 @media screen and (max-width: 450px) {
     #img-output {
         columns: 1;
+        pointer-events: none !important;
     }
 }
 
@@ -328,7 +356,8 @@ section {
 }
 
 .page-button-wrapper {
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     height: 40px;
     margin: 1rem auto;
 }
@@ -447,4 +476,8 @@ section {
 }
 .dark .big-photo-wrapper .comment-section {
     background-color: #363636;
+}
+
+.dark .comment-section .comment-wrapper {
+    background-color: var(--secondary-color);
 }
