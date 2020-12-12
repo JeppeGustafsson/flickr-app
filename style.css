@@ -160,7 +160,7 @@ section {
     border-radius: 20px;
     width: 100%;
     max-height: 500px;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
@@ -503,4 +503,8 @@ section {
 
 .dark .comment-section .comment-wrapper {
     background-color: var(--secondary-color);
+}
+
+.dark .page-button-wrapper span {
+    color: var(--light);
 }
