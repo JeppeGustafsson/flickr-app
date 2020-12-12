@@ -274,6 +274,12 @@ section {
         columns: 1;
         pointer-events: none !important;
     }
+    .options-wrapper {
+        left: 10px !important;
+    }
+    .options-wrapper::before {
+        left: 30% !important;
+    }
 }
 
 .settings-btn {

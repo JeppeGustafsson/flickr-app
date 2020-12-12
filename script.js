@@ -5,6 +5,7 @@ const loader = document.getElementById('loader');
 const optionBtns = document.getElementById('optionBtns');
 const pageButtons = document.getElementById('page-btn-output');
 const switchModeBtn = document.getElementById('darkLightWrapper');
+const settingsBtn = document.getElementById('settingsBtn');
 let query = "";
 
 const updateQuery = () => { query = document.getElementById('search').value };
@@ -30,7 +31,7 @@ const getPopular = async () => {
     pageButtons.innerHTML = null;
     output.innerHTML = null;
     loader.classList.add('loading');
-    const API = `https://api.flickr.com/services/rest?method=flickr.photos.getRecent&api_key=${KEY}&per_page=${perPage}&page=1&safe_search=${safeSearch}&sort=relevance&format=json&nojsoncallback=1`;
+    const API = `https://api.flickr.com/services/rest?method=flickr.interestingness.getList&api_key=${KEY}&per_page=${perPage}&page=1&safe_search=${safeSearch}&sort=relevance&format=json&nojsoncallback=1`;
     await fetch(API)
             .then(response => response.json())
             .then(data => results = data)
@@ -54,6 +55,7 @@ const search = async () => {
                 console.log('Error ', error);
             });
     
+    pageNums = [1,2,3,4];
     renderImages();
     renderPageButtons();
 }
@@ -74,10 +76,6 @@ const renderImages = () => {
                             <img src="https://live.staticflickr.com/${photoObj.server}/${photoObj.id}_${photoObj.secret}_c.jpg" alt="${photoObj.title}"/>
                             <h2 class="font-style-secondary">${photoObj.title}</h2>
                             <h3 class="font-style-secondary">User comments:</h3>
-                            <div class="add-comment-wrapper font-style-secondary">
-                                <input class="font-style-secondary" type="text" />
-                                <button class="font-style-secondary">Post</button>
-                            </div>
                             <div class="comment-section font-style-secondary">
 
                             </div>
@@ -208,9 +206,11 @@ const toggleDarkLightMode = () => {
     if (document.querySelector('body').className == 'light') {
         document.querySelector('body').classList.remove('light');
         document.querySelector('body').classList.add('dark');
+        settingsBtn.querySelector('img').src = './images/settings-light.png';
     } else {
         document.querySelector('body').classList.add('light');
         document.querySelector('body').classList.remove('dark');
+        settingsBtn.querySelector('img').src = './images/settings.png';
     }
 }
 
