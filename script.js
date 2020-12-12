@@ -12,7 +12,13 @@ const updateQuery = () => { query = document.getElementById('search').value };
 let results;
 let comments = [];
 let page = 1;
-let pageNums = 1;
+let pageNums = [
+    1,
+    2,
+    3,
+    4
+];
+
 let safeSearch = 1; //1 is safe, 2 is moderate, 3 is restricted
 let perPage = 100;
 const KEY = 'f1f5b58600f355d082028d2df6fbef8e';
@@ -164,20 +170,15 @@ const stepPage = async () => {
 
 
 const renderPageButtons = () => {
-    pageNums = 1;
-    while (pageNums < 5) {
-        const content = `<button class="page-button"> ${pageNums} </button>`;
+    console.log(pageNums);
+    pageNums.forEach(num => {
+        const content = `<button class="page-button"> ${num} </button>`;
         pageButtons.innerHTML += content;
-        pageNums++;
-    }
-
-    if (results.photos.page == pageButtons.children[3].innerText) {
-        pageButtons.removeChild(pageButtons.children[0]);
-        pageButtons.innerHTML += `<button class="page-button"> ${page+1} </button>`;
-    }
+    });
 
     const lastBtn = `<button class="page-button"> ${results.photos.pages} </button>`;
-    pageButtons.innerHTML += '...' + lastBtn;
+    pageButtons.innerHTML += '<span>...<span>'; 
+    pageButtons.innerHTML += lastBtn;
 
     document.querySelectorAll('.page-button').forEach(btn => {
         btn.addEventListener('click', selectPage)
@@ -187,6 +188,19 @@ const renderPageButtons = () => {
 const selectPage = (e) => {
    let selectedPageNumber = parseInt(e.target.innerText);
    page = selectedPageNumber;
+
+   if (selectedPageNumber === pageNums[0] && pageNums[0] !== 1) {
+        pageNums[0] = pageNums[0] - 1;
+        pageNums[1] = pageNums[1] - 1;
+        pageNums[2] = pageNums[2] - 1;
+        pageNums[3] = pageNums[3] - 1;
+   } else if (selectedPageNumber === pageNums[3]) {
+        pageNums[0] = pageNums[0] + 1;
+        pageNums[1] = pageNums[1] + 1;
+        pageNums[2] = pageNums[2] + 1;
+        pageNums[3] = pageNums[3] + 1;
+   };
+
    stepPage();
 }
 
