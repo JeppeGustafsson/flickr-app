@@ -25,8 +25,6 @@ let perPage = 100;
 const KEY = 'f1f5b58600f355d082028d2df6fbef8e';
 const ID = '191350676@N04';
 
-//TO USE: Tags, photos.comments, search, galleries
-
 const getPopular = async () => {
     pageButtons.innerHTML = null;
     output.innerHTML = null;
@@ -100,20 +98,32 @@ const renderFilters = () => {
 
 const activeImage = (e) => {
     // comments = [];
-    e.target.firstElementChild.classList.add('active');
+    try {
+        e.target.firstElementChild.classList.add('active');
+    } catch (err) {
+        console.log(err);
+    }
     const resultChildren = Array.from(output.children);
     const index = resultChildren.indexOf(e.target);
+    try {
         fetch(`https://api.flickr.com/services/rest?method=flickr.photos.comments.getList&api_key=${KEY}&photo_id=${results.photos.photo[index].id}&format=json&nojsoncallback=1`)
-            .then(response => response.json())
-            .then(data => comments = data.comments.comment);
-    console.log(comments);
+        .then(response => response.json())
+        .then(data => comments = data.comments.comment);
+        console.log(comments);
+    } catch (err) {
+        console.log(err);
+    }
 
     comments.forEach(comment => {
         const commentEl = `<div class="comment-wrapper"> 
                             <p class="comment-author"> ${comment.authorname} </p>
                             <p class="comment-content"> ${comment._content} </p>
                           </div>`;
-        e.target.querySelector('.comment-section').innerHTML += commentEl;
+        try {
+            e.target.querySelector('.comment-section').innerHTML += commentEl;
+        } catch (err) {
+            console.log(err);
+        }
     });
 }
 
